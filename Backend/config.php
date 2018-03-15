@@ -3,8 +3,8 @@
 return array (
 
 	'username' => 'root',
-	'password' => 'root',
-	'host' => 'localhost',
-	'database' => 'HOP',
+	'password' => '',
+	'host' => 'mysql:host=localhost;dbname=beer',
+	'database' => 'hop',
 
 );
