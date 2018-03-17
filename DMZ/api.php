@@ -4,6 +4,10 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
+$curl = curl_init();
+$apikey = '35ac36973944221658d74aee2f32bb0c';
+$BASE_URL = "http://api.brewerydb.com/v2/";
+
 function requestProcessor($request) {
 	echo "Request received".PHP_EOL;
 
@@ -13,7 +17,10 @@ function requestProcessor($request) {
 
 	switch ($request['type']) {
 
-		case "apisearch":
+		case "apiBeerSearch":
+			return searchApiBeer($request['searchAPI']);
+
+		case "apiCategorySearch":
 			return searchApiBeer($request['searchAPI']);
 	}
 
@@ -22,11 +29,7 @@ function requestProcessor($request) {
 
 function searchApiBeer($apiBeerSearch) {
 
-	$curl = curl_init();
-	$apikey = '35ac36973944221658d74aee2f32bb0c';
 	$beer_info = $apiBeerSearch;
-	// $category_info = urlencode('North American Lager');
-	$BASE_URL = "http://api.brewerydb.com/v2/";
 
 	curl_setopt_array($curl, array(
 		CURLOPT_URL => "$BASE_URL/beers/?name=$beer_info&key=$apikey",
@@ -91,6 +94,7 @@ function searchApiBeer($apiBeerSearch) {
 	print_r($result_array);
 	return $result_array;
 }
+
 
 $server = new rabbitMQServer("testRabbitMQ.ini", "Backend");
 $server->process_requests('requestProcessor');

@@ -8,7 +8,7 @@ $client = new rabbitMQClient("testRabbitMQ.ini", "Frontend");
 
 if (isset($_POST['beerName'])){
 	$request = array();
-	$request['type'] = "search";
+	$request['type'] = "searchBeer";
 	$request['searchBeer'] = $_POST['beerName'];
 	$request['message'] = 'Beer Search';
 
@@ -16,6 +16,16 @@ if (isset($_POST['beerName'])){
 
 	require('beer.view.php');
 
+} elseif (isset($_POST['categoryName'])) {
+
+	$request = array();
+	$request['type'] = "searchCategory";
+	$request['searchCategory'] = $_POST['categoryName'];
+	$request['message'] = 'Category Search';
+
+	$response = $client->send_request($request);
+
+	require('beer.view.php');
 }
 
 ?>

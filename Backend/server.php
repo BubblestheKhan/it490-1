@@ -22,8 +22,11 @@ function requestProcessor($request) {
 		case "register":
 			return doRegister($request['register']);
 
-		case "search":
+		case "searchBeer":
 			return searchBeer($request['searchBeer']);
+
+		case "searchCategory":
+			return searchCategory($request['searchCategory']);
 	}
 
 	return array("returnCode" => '0', 'message' => "Server received request and processed");
@@ -54,7 +57,7 @@ function searchBeer($beerSearch) {
 		$client = new rabbitMQClient("testRabbitMQ.ini", "Backend");
 
 		$request = array();
-		$request['type'] = "apisearch";
+		$request['type'] = "apiBeerSearch";
 		$request['searchAPI'] = urlencode($beerSearch);
 		$request['message'] = 'API Search for Beer';
 
@@ -71,6 +74,51 @@ function searchBeer($beerSearch) {
 	} else {
 		return $row;
 	}
+}
+
+function searchCategory($categorySearch) {
+	try {
+		$pdo = new PDO("mysql:host=localhost;dbname=HOP", "root", "root");
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		echo 'Connected Successfully'.PHP_EOL;
+
+	} catch (PDOException $e) {
+		echo "Connection Failed: " . $e->getMessage();
+	
+	}
+
+	$result = $pdo->prepare("SELECT * FROM beer where category = '{$categorySearch}'");
+	$result->execute();
+
+	$row = $result->fetchAll();
+
+	if (empty($row)) {
+		echo "Could not find '{$categorySearch}' from local database\n";
+		echo "Searching through the API database....";
+
+		$client = new rabbitMQClient("testRabbitMQ.ini", "Backend");
+
+		$request = array();
+		$request['type'] = 'apiCategorySearch';
+		$request['searchAPI'] = urlencode($categorySearch);
+		$request['message'] = 'API Search for Category';
+
+		$api_request = $client->send_request($request);
+
+		insertBeer($api_request['name'], $api_request['description'], $api_request['type'], $api_request['available'], $api_request['category']);
+
+		echo "Added Successfully";
+
+		$result = $pdo->prepare("SELECT * FROM beer where category = '{$categorySearch}'");
+
+		return $result->fetchAll();
+	
+	} else {
+
+		return $row;
+	}
+
 }
 
 function insertBeer($name, $description, $type, $available, $category) {
