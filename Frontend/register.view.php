@@ -10,13 +10,24 @@
 
 	<div class="background-image h-100">
 		<div class="login-box row h-100 justify-content-center align-items-center">
-			<form method="post" class="col-12 login-form" action='login.php'>
+			<form method="post" class="col-12 login-form" action='registration.php'>
 				<h1 id="login-title">HOPS</h1>
 				<p id="login-subtitle">Social Drinkers only</p>
+				<div class="error-div">
+					<span class="error"><?php echo $missingError; ?></span>
+					<br/>
+					<span class="error"><?php echo $validateError; ?></span>
+				</div>
 				<div class="form-group row">
 					<label class='col-md-12 col-form-label col-form-label-lg'>Username</label>
 					<div class="col-md-12">
 						<input type="text" name="username" placeholder="Enter your username" class="form-control input-lg">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class='col-md-12 col-form-label col-form-label-lg'>Email Address</label>
+					<div class="col-md-12">
+						<input type="text" name="email" placeholder="Enter your username" class="form-control input-lg">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -26,9 +37,12 @@
 					</div>
 				</div>
 				<div class="form-group row">
+					<label class='col-md-12 col-form-label col-form-label-lg'>Confrm Password</label>
 					<div class="col-md-12">
-						<input type="submit" class="btn btn-success btn-lg btn-block" value="SIGN IN" name="login">
+						<input type="text" name="confirmPassword" placeholder="Verify your password" class="form-control input-lg">
 					</div>
+				</div>
+				<div class="form-group row">
 					<div class="col-md-12">
 						<input type="submit" class="btn btn-success btn-lg btn-block" value="CREATE AN ACCOUNT" name="register">
 					</div>
