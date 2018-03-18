@@ -31,6 +31,18 @@
 					</div>
 				</div>
 				<div class="form-group row">
+					<label class='col-md-12 col-form-label col-form-label-lg'>Firstname</label>
+					<div class="col-md-12">
+						<input type="text" name="firstname" placeholder="Enter your firstname" class="form-control input-lg">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class='col-md-12 col-form-label col-form-label-lg'>Lastname</label>
+					<div class="col-md-12">
+						<input type="text" name="lastname" placeholder="Enter your lastname" class="form-control input-lg">
+					</div>
+				</div>
+				<div class="form-group row">
 					<label class='col-md-12 col-form-label col-form-label-lg'>Password</label>
 					<div class="col-md-12">
 						<input type="text" name="password" placeholder="Enter your password" class="form-control input-lg">

@@ -13,6 +13,9 @@
 			<form method="post" class="col-12 login-form" action='login.php'>
 				<h1 id="login-title">HOPS</h1>
 				<p id="login-subtitle">Social Drinkers only</p>
+				<div class="error-div">
+					<span class="error"><?php echo $error; ?></span>
+				</div>
 				<div class="form-group row">
 					<label class='col-md-12 col-form-label col-form-label-lg'>Username</label>
 					<div class="col-md-12">

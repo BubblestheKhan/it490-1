@@ -1,0 +1,30 @@
+body, html {
+	height: 100%;
+	margin: 0;
+	font-family: "Impact";
+}
+
+.title {
+
+	color: #ffffff;
+
+}
+
+.main-content {
+	margin-top: 8px;
+	padding: 8px 0;
+	text-align: center;
+}
+
+.col {
+	border: 1px solid black;
+	margin-left: 20px;
+}
+
+.profile {
+	height: 600px;
+}
+
+.search {
+	border: 1px solid black;
+}

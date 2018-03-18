@@ -7,30 +7,25 @@ require_once("path.inc");
 $client = new rabbitMQClient("testRabbitMQ.ini", "Frontend");
 $date = date("Y-m-d", time());
 
-$options = ['length' => 11];
-
 $username = htmlspecialchars($_POST['username']);
 $password = htmlspecialchars($_POST['password']);
 $confirmPassword = htmlspecialchars($_POST['confirmPassword']);
-$hash = password_hash($passwd, PASSWORD_DEFAULT, $options);
 $email = htmlspecialchars($_POST['email']);
+$firstname = htmlspecialchars($_POST['firstname']);
+$lastname = htmlspecialchars($_POST['lastname']);
 
 $missingError = '';
 $validateError = '';
 
 
 if (isset($_POST['register'])) {
-	if ((empty($username)) or ((empty($email)) or ((empty($password))))) {
+	if ((empty($username)) or ((empty($email)) or ((empty($password))) or ((empty($firstname))) or ((empty($lastname))))) {
 		$missingError = "Oops! You are missing some fields."; 
 	
 		if ($confirmPassword != $password) {
 			$validateError = "Oops! Password did not match.";
 
 		}
-		var_dump($_POST['password']);
-		var_dump($username);
-		var_dump($password);
-		var_dump($email);
 
 		require 'register.view.php';
 	
@@ -39,13 +34,16 @@ if (isset($_POST['register'])) {
 		$request = array();
 		$request['type'] = "register";
 		$request['username'] = $username;
-		$request['password'] = $hash;
+		$request['password'] = $password;
 		$request['email'] = $email;
-		$request['message'] = "'{userame}' has been registered '{$date}'";
+		$request['firstname'] = $firstname;
+		$request['lastname'] = $lastname;
+		$request['message'] = "'{$username}' has been registered '{$date}'";
 
 		$response = $client->send_request($request);
 
-		header('Location: index.view.php');
+		require 'index.view.php';
+		
 	}
 } 
 	
