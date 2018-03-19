@@ -16,6 +16,26 @@ $username = $_SESSION['username'];
 $firstname = $_SESSION['firstname'];
 $lastname = $_SESSION['lastname'];
 
+$search = htmlspecialchars($_POST['search']);
+
+if (!empty($search)) {
+	$request['type'] = 'search';
+	$request['beer'] = $search;
+	$request['message'] = '{$username} searched for {$search}';
+
+	$response = $client->send_request($request);
+
+	header('Location: beer.view.php');
+	
+}
+
+var_dump(isset($_POST['logout']));
+
+if (isset($_POST['logout'])) {
+	session_destroy();
+	header('Location: index.view.php');
+
+}
 
 require 'profile.view.php';
 

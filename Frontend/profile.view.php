@@ -11,32 +11,22 @@
 		<div class="container">
 			<h2 class="title">HOPS</h2>
 			<form class="form-inline" method="post" action="profile.php">
-				<input class="form-control mr-sm-2" type="search" placeholder="Find Beers or Breweries" aria-label="Search">
+				<input class="form-control mr-sm-2" type="search" placeholder="Find Beers or Breweries" aria-label="Search" name='search'>
 				<button class="btn btn-default my-2 my-sm-2" type="submit">Search</button>
 		  	</form>
 		  </div>
 	</nav>
 
 	<div class="container">
-		<div class="row main-content">
-			<div class="col-md-8 col">
-				<div class="row">
-					<div class="col-md-6 search">
-						<form method="post" action="profile.php">
-							<input type="submit" name="beer" class="btn btn-success btn-lg" value="Beer">
-						</form>
-					</div>
-					<div class="col-md-6 search">
-						<form method="post" action="profile.php">
-							<input type="submit" name="beer" class="btn btn-success btn-lg " value="Brewery">
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col profile">
-				<?php echo $username; ?>
-				<?php echo $firstname; ?>
-				<?php echo $lastname; ?>
+		<div class="main-content">
+			<div class="profile">
+				<h1><span id="username"><?php echo $username; ?></span></h1>
+				<span id="name"><?php echo $firstname . ' ' .$lastname; ?></span>
+				<form method="post" action="profile.php">
+					<input type="submit" class=" logout btn btn-outline-danger btn-sm" name='logout' value="Log out">
+				</form>
+				
+				
 			</div>
 		</div>
 

@@ -27,7 +27,7 @@ if (isset($_POST['register'])) {
 		$request['type'] = "login";
 		$request['username'] = $username;
 		$request['password'] = $password;
-		$request['message'] = "'{userame}' requests to login '{$date}'";
+		$request['message'] = "'{$userame}' requests to login '{$date}'";
 		
 		$response = $client->send_request($request);
 
