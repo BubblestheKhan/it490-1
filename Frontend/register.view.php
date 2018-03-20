@@ -24,12 +24,12 @@
 						<input type="text" name="username" placeholder="Enter your username" class="form-control input-lg">
 					</div>
 				</div>
-				<div class="form-group row">
+				<!--div class="form-group row">
 					<label class='col-md-12 col-form-label col-form-label-lg'>Email Address</label>
 					<div class="col-md-12">
 						<input type="text" name="email" placeholder="Enter your username" class="form-control input-lg">
 					</div>
-				</div>
+				</div-->
 				<div class="form-group row">
 					<label class='col-md-12 col-form-label col-form-label-lg'>Firstname</label>
 					<div class="col-md-12">
